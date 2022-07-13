@@ -61,13 +61,12 @@ class TeleBot:
         genres = formatted_genres[:-2]
         data = f'Название: {title}\n\nЖанры: {genres}\n\nОписание: {description}'
         self.bot.send_message(chat_id, data)
-        with open("image_for_post.jpg", 'rb') as file:
+        with open("poster.jpg", 'rb') as file:
             answ = self.bot.send_document(chat_id, file, reply_markup=markup)
         self.bot.register_next_step_handler(answ, self.next_step_after_film)
 
     def find_film(self, selected_genre):
         seed(randint(0, 100))
-        print(selected_genre)
 
         response = requests.get(f'https://api.themoviedb.org/3/discover/movie?api_key={self.api_key}&with_genres={selected_genre}&language={self.language}&page={randint(1, 20)}')
         response = json.loads(response.text)
@@ -84,14 +83,12 @@ class TeleBot:
             return
 
         self.image = requests.get(f'https://image.tmdb.org/t/p/w500{response["results"][selected_film]["poster_path"]}').content
-        print('nice')
-        with open('image_for_post.jpg', 'wb') as file:
+        with open('poster.jpg', 'wb') as file:
             file.write(self.image)
 
         return [self.title, self.genres, self.description]
 
     def next_step_after_film(self, message):
-        print('******', message.text, '******')
         if message.text == 'Следующий':
             title, genre, description = self.find_film(self.current_genre)
             self.send_results(message.chat.id, title, genre, description)
