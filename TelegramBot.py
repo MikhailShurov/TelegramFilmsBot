@@ -54,6 +54,7 @@ class FilmsBot:
 
         @self.bot.message_handler(content_types=['text'])
         def change_genre(message):
+            print('catch')
             answ = self.bot.send_message(message.chat.id, 'Фильмы какого из этих жанров мне стоит поискать?\n\n1. Боевик\n2. Вестерн\n3. Военный\n4. Детектив\n5. Документальный\n6. Драма\n7. История\n8. Комедия\n9. Криминал\n10. Мелодрама\n11. Музыка\n12. Мультфильм\n13. Приключения\n14. Семейный\n15. Телефильм\n16. Триллер\n17. Ужасы\n18. Фантастика\n19. Фэнтези')
             self.bot.message_handler(answ, self.catch_genre_index)
 
