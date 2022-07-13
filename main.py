@@ -60,7 +60,6 @@ class TeleBot:
         formatted_genres = str(genres[0] + ', ') + ''.join(str(genres[i].lower() + ', ') for i in range(len(genres)) if i != 0)
         genres = formatted_genres[:-2]
         data = f'Название: {title}\n\nЖанры: {genres}\n\nОписание: {description}'
-        # self.bot.send_message(chat_id, data)
         with open("poster.jpg", 'rb') as file:
             answ = self.bot.send_photo(chat_id, file, data, reply_markup=markup)
         self.bot.register_next_step_handler(answ, self.next_step_after_film)
