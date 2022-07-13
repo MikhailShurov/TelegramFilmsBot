@@ -30,7 +30,7 @@ class TeleBot:
                               27: "Ужасы",
                               878: "Фантастика",
                               14: "Фэнтези"}
-        self.genres = [28, 37, 10752, 9648, 99, 18, 36, 35, 80, 10749, 10402, 16, 12, 10751, 10770, 53, 27, 878, 14]
+        self.only_genres_keys = [28, 37, 10752, 9648, 99, 18, 36, 35, 80, 10749, 10402, 16, 12, 10751, 10770, 53, 27, 878, 14]
 
         self.api_key = '51201bea16768dcaccd8a5c90e6c7972'
         self.language = 'ru-RU'
@@ -47,7 +47,7 @@ class TeleBot:
 
     def analyze_genre(self, message):
         index = int(message.text)
-        self.current_genre = self.genres[index-1]
+        self.current_genre = self.only_genres_keys[index-1]
         title, genre, description = self.find_film(self.current_genre)
         self.send_results(message.chat.id, title, genre, description)
 
