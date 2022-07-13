@@ -52,11 +52,18 @@ class FilmsBot:
             answ = self.bot.send_message(message.chat.id, mess2)  # , reply_markup=markup
             self.bot.register_next_step_handler(answ, self.catch_genre_index)
 
-        # @self.bot.message_handler(content_types=['text'])
-        # def
+        @self.bot.message_handler(content_types=['text'])
+        def change_genre(message):
+            answ = self.bot.send_message(message.chat.id, 'Фильмы какого из этих жанров мне стоит поискать?\n\n1. Боевик\n2. Вестерн\n3. Военный\n4. Детектив\n5. Документальный\n6. Драма\n7. История\n8. Комедия\n9. Криминал\n10. Мелодрама\n11. Музыка\n12. Мультфильм\n13. Приключения\n14. Семейный\n15. Телефильм\n16. Триллер\n17. Ужасы\n18. Фантастика\n19. Фэнтези')
+            self.bot.message_handler(answ, self.catch_genre_index)
 
     def catch_genre_index(self, message):
-        index = int(message.text)
+        try:
+            index = int(message.text)
+        except:
+            answ = self.bot.send_message(message.chat.id, 'Фильмы какого из этих жанров мне стоит поискать?\n\n1. Боевик\n2. Вестерн\n3. Военный\n4. Детектив\n5. Документальный\n6. Драма\n7. История\n8. Комедия\n9. Криминал\n10. Мелодрама\n11. Музыка\n12. Мультфильм\n13. Приключения\n14. Семейный\n15. Телефильм\n16. Триллер\n17. Ужасы\n18. Фантастика\n19. Фэнтези')
+            self.bot.message_handler(answ, self.catch_genre_index)
+            return
         id = message.chat.id
         a, b, c = self.parse_info(self.genres[index-1])
         self.send_information_to_make_a_post(a, b, c, id)
