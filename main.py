@@ -66,12 +66,12 @@ class TeleBot:
 
     def find_film(self, selected_genre):
         seed(randint(0, 100))
-
-        response = requests.get(f'https://api.themoviedb.org/3/discover/movie?api_key={self.api_key}&with_genres={selected_genre}&language={self.language}&page={randint(1, 20)}')
+        page = randint(1, 20)
+        response = requests.get(f'https://api.themoviedb.org/3/discover/movie?api_key={self.api_key}&with_genres={selected_genre}&language={self.language}&page={page}')
         response = json.loads(response.text)
 
         selected_film = randint(0, 19)
-        print(response, selected_film, seed)
+        print(response, selected_film)
         self.title = response["results"][selected_film]["title"]
         self.genres = response["results"][selected_film]["genre_ids"]
         for i in range(len(self.genres)):
