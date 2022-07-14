@@ -41,12 +41,6 @@ class TeleBot:
         def start_message(message):
             self.select_genre(message)
 
-        @self.bot.message_handler(content_types='text')
-        def check_any_messages(message):
-            if message.text == 'Сменить жанр':
-                self.select_genre(message)
-            pass
-
     def select_genre(self, message):
         answ = self.bot.send_message(message.chat.id, 'Фильмы какого из этих жанров мне стоит поискать?\n\n1. Боевик\n2. Вестерн\n3. Военный\n4. Детектив\n5. Документальный\n6. Драма\n7. История\n8. Комедия\n9. Криминал\n10. Мелодрама\n11. Музыка\n12. Мультфильм\n13. Приключения\n14. Семейный\n15. Телефильм\n16. Триллер\n17. Ужасы\n18. Фантастика\n19. Фэнтези', reply_markup=types.ReplyKeyboardRemove())
         self.bot.register_next_step_handler(answ, self.analyze_genre)
@@ -77,6 +71,7 @@ class TeleBot:
         response = json.loads(response.text)
 
         selected_film = randint(0, 19)
+        print(response, selected_film)
         self.title = response["results"][selected_film]["title"]
         self.genres = response["results"][selected_film]["genre_ids"]
         for i in range(len(self.genres)):
