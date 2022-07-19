@@ -90,7 +90,11 @@ class TeleBot:
 
     def next_step_after_film(self, message):
         if message.text == 'Следующий':
-            title, genre, description = self.find_film(self.current_genre)
+            title, genre, description = None, None, None
+            try:
+                title, genre, description = self.find_film(self.current_genre)
+            except:
+                self.next_step_after_film(message)
             self.send_results(message.chat.id, title, genre, description)
             return
         if message.text == 'Сменить жанр':
