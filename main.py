@@ -71,7 +71,7 @@ class TeleBot:
         response = json.loads(response.text)
 
         selected_film = randint(0, 19)
-        print(response, selected_film)
+        print('created new request')
         self.title = response["results"][selected_film]["title"]
         self.genres = response["results"][selected_film]["genre_ids"]
         for i in range(len(self.genres)):
