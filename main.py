@@ -6,11 +6,11 @@ from random import randint, seed
 import json
 
 import requests
-
+import secretData
 
 class TeleBot:
     def __init__(self):
-        self.bot = telebot.TeleBot('5049347663:AAHrg7oBpxXO_w5oeWaptAINCbkCKNojdYo')
+        self.bot = telebot.TeleBot(secretData.bot_token)
         self.genres_values = {28: "Боевик",
                               37: "Вестерн",
                               10752: "Военный",
