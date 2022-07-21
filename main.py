@@ -32,7 +32,7 @@ class TeleBot:
                               14: "Фэнтези"}
         self.only_genres_keys = [28, 37, 10752, 9648, 99, 18, 36, 35, 80, 10749, 10402, 16, 12, 10751, 10770, 53, 27, 878, 14]
 
-        self.api_key = '51201bea16768dcaccd8a5c90e6c7972'
+        self.api_key = secretData.tmdb_api_key
         self.language = 'ru-RU'
 
         self.current_genre = None
